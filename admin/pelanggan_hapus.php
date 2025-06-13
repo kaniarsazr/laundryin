@@ -1,17 +1,13 @@
 <?php
+//menghubungkan koneksi
 include '../koneksi.php';
 
+//menangkap data id yang dikirim dari url
 $id = $_GET['id'];
 
-// Hapus dulu data di log_transaksi yang terkait dengan transaksi ini
-mysqli_query($koneksi, "DELETE FROM log_transaksi WHERE log_transaksi_id='$id'");
+//menghapus pelanggan
+mysqli_query($koneksi, "delete from pelanggan where pelanggan_id='$id'");
 
-// Hapus dulu data di pakaian yang terkait dengan transaksi ini
-mysqli_query($koneksi, "DELETE FROM pakaian WHERE pakaian_transaksi='$id'");
-
-// Baru hapus data transaksi
-mysqli_query($koneksi, "DELETE FROM transaksi WHERE transaksi_id='$id'");
-
-// Redirect kembali ke halaman transaksi
-header("location:transaksi.php");
+//alihkan halaman ke halaman pelanggan
+header("location:pelanggan.php");
 ?>
