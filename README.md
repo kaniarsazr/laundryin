@@ -10,6 +10,8 @@ LaundryIn merupakan sistem informasi laundry sederhana yang dibangun menggunakan
 
 Stored procedure di LaundryIn digunakan untuk membungkus logika penting saat melakukan transaksi laundry. Prosedur ini disimpan di sisi database dan menjamin bahwa pengolahan data utama berjalan terstruktur dan efisien.
 
+![image](https://github.com/user-attachments/assets/f4b6bdc7-0e0b-40bc-8f8c-336cd2023bc4)
+
 #### Contoh:
 
 ```sql
@@ -75,6 +77,8 @@ Dengan mekanisme ini, sistem mencegah penyimpanan setengah jadi yang dapat menye
 
 Stored function digunakan untuk menghitung total harga secara otomatis berdasarkan berat pakaian dan harga per kilo. Dengan menyimpan fungsi ini di dalam database, perhitungan menjadi lebih konsisten dan tidak perlu dikodekan ulang di banyak tempat.
 
+![image](https://github.com/user-attachments/assets/ef93245a-3bda-41b8-8c7f-ef2df6c8b8da)
+
 #### Contoh:
 
 ```sql
@@ -93,6 +97,8 @@ Function ini dipanggil dari dalam `tambah_transaksi`, sehingga perhitungan total
 ### 🔄 Trigger
 
 Trigger di LaundryIn digunakan untuk menjaga otomatisasi status pelanggan dan pencatatan log ketika terjadi perubahan data di tabel `transaksi`. Dua trigger utama digunakan untuk mengelola status pelanggan berdasarkan aktivitas transaksi:
+
+![image](https://github.com/user-attachments/assets/987e4d82-4f88-4868-824e-e5b7d8ad5af3)
 
 #### 1. `after_insert_transaksi`
 
