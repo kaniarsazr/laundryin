@@ -1,42 +1,25 @@
+<!-- header.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Sistem Informasi Laundry</title>
-    <link rel="stylesheet" type="text/css" 
-    href="../assets/css/bootstrap.css">
-    <script type="text/javascript" 
-    src="../assets/js/jquery.js"></script>
-    <script type="text/javascript" 
-    src="../assets/js/bootstrap.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LaundryIn - Admin</title>
 
-    <link rel="stylesheet" type="text/css" 
-    href="../assets/font-awesome/css/all.css">
+  <!-- Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+
+  <!-- Bootstrap CSS (untuk ikon Bootstrap & utilitas tambahan) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+
 </head>
 
-<body style="background: #f0f0f0">
-    <!--Cek apakah sudah login-->
-    <?php
-        session_start();
-        if($_SESSION['status'] != "login"){
-            header("location:../index.php?pesan=belum_login");
-        }
-    ?>
+<body class="bg-gray-100 text-gray-800">
 
-    <!--Menu Navigasi-->
-    <nav class="navbar navbar-inverse" style="border-radius: 0px">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" 
-                data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-                aria-expanded="false">
-                    <span class="sr-only">Toggle Navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.php">
-                LaundryIn</a>
-            </div><!--End of "navbar-header"-->
+  <!-- Navbar -->
+  <nav class="bg-gradient-to-r from-[#0275d8] via-[#1891f5] to-[#5bc0de] shadow-md">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
 
             <div class="collapse navbar-collapse" 
             id="#bs-example-navbar-collapse-1">
@@ -59,12 +42,5 @@
                     </i>Log Out</a></li>
                 </ul> <!--nav navbar-nav-->
 
-                <ul class="nav navbar-nav navbar-right">
-                    <li><p class="navbar-text"><i class="fa fa-user-shield"></i> Halo, <b>
-                    <?php echo $_SESSION['username'];?></b>!</p></li>
-                </ul>
-            </div> <!--End of 'collapse navbar-collapse'-->
-        </div><!--End of "Container-fluid"-->
-    </nav>
-</body>
-</html>
+  <!-- Mulai Konten -->
+  <main class="p-6">

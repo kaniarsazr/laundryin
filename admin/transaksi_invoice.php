@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Invoice Sistem Informasi Laundry - Ahmad Irfanda</title>
+    <title>Laundryin</title>
     <link rel="stylesheet" type="text/css" 
     href="../assets/css/bootstrap.css">
     <script type="text/javascript" src="../assets/js/jquery.js"></script>
@@ -34,7 +34,7 @@
 
         while($t=mysqli_fetch_array($transaksi)){
             ?>
-            <center><h2>LAUNDRY "AHMAD IRFANDA"</h2></center>
+            <center><h2>Laundryin</h2></center>
             <h3></h3>
             <a href="transaksi_invoice_cetak.php?id=<?php echo 
             $id;?>" target="_self" class="btn btn-primary pull-right"><i 

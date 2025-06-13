@@ -1,37 +1,34 @@
-<?php include 'header.php';?>
+<?php include 'header.php'; ?>
 
-<div class="container">
-    <br/><br/><br/>
-    <div class="col-md-5 col-md-offset-3">
-        <div class="panel">
-            <div class="panel-heading">
-                Tambah Pelanggan baru
-            </div>
+<div class="min-h-screen bg-gray-100 py-10 px-4">
+  <div class="max-w-xl mx-auto bg-white p-8 rounded-2xl shadow-lg">
+    <h2 class="text-2xl font-bold text-gray-800 mb-6">🧾 Tambah Pelanggan Baru</h2>
 
-            <div class="panel-body">
-                <form method="post" action="pelanggan_aksi.php">
-                    <div class="form-group">
-                    <label>Nama</label>
-                    <input type="text" class="form-control"
-                    name="nama" placeholder="Masukkan Nama ..">
-                    </div>
-                    <div class="form-group">
+    <form method="post" action="pelanggan_aksi.php" class="space-y-5">
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Nama</label>
+        <input type="text" name="nama" placeholder="Masukkan Nama..."
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+      </div>
 
-                    <label>HP</label>
-                    <input type="text" class="form-control"
-                    name="hp" placeholder="Masukkan No.Hp ..">
-                    </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">HP</label>
+        <input type="text" name="hp" placeholder="Masukkan No. HP..."
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+      </div>
 
-                    <div class="form-group">
-                        <label>Alamat</label>
-                        <input type="text" class="form-control"
-                        name="alamat" placeholder="Masukkan Alamat ..">
-                    </div><br/>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Alamat</label>
+        <input type="text" name="alamat" placeholder="Masukkan Alamat..."
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+      </div>
 
-                    <input type="submit" class="btn btn-primary"
-                    value="Simpan">
-                </form>
-            </div>
-        </div>
-    </div>
-</div><!--End of container-->
+      <div class="pt-4">
+        <button type="submit"
+          class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition duration-200">
+          💾 Simpan Data
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

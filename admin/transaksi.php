@@ -1,72 +1,85 @@
-<?php include 'header.php';?>
+<?php include 'header.php'; ?>
 
-<div class="container">
-    <div class="panel">
-        <div class="panel-heading">
-            <h4>Data Transaksi Laundry</h4>
+<div class="px-6 py-10">
+    <div class="bg-white shadow-md rounded-lg p-6">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-semibold text-gray-800">Data Transaksi Laundry</h2>
+            <a href="transaksi_tambah.php" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm">
+                <i class="fas fa-plus mr-1"></i> Transaksi Baru
+            </a>
         </div>
-        <div class="panel-body">
-            <a href="transaksi_tambah.php" class="btn btn-sm 
-            btn-info pull-right"><i class="fa fa-plus"></i> Transaksi baru</a>
-            <br/><br/>
-            <table class="table table-bordered table-striped">
-                <tr>
-                    <th width="1%">No</th>
-                    <th>Invoice</th>
-                    <th>Tanggal</th>
-                    <th>Pelanggan</th>
-                    <th>Berat (Kg)</th>
-                    <th>Tgl. Selesai</th>
-                    <th>Harga</th>
-                    <th>Status</th>
-                    <th width="13%">OPSI</th>
-                </tr>
-                <?php
-                //koneksi database
-                include '../koneksi.php';
-                //mengambil data pelanggan dari database (2 table sekaligus)
-                $data = mysqli_query($koneksi, "SELECT * FROM pelanggan,transaksi
-                where transaksi_pelanggan=pelanggan_id order by transaksi_id desc");
-                $no = 1;
-                //mengubah data ke array dan menampilkannya dengan perulangan while
-                while($d = mysqli_fetch_array($data)){
-                    ?>
+
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200 text-sm">
+                <thead class="bg-blue-600 text-white">
                     <tr>
-                        <td><?php echo $no++;?></td>
-                        <td>INVOICE-<?php echo $d['transaksi_id'];?></td>
-                        <td><?php echo $d['transaksi_tgl'];?></td>
-                        <td><?php echo $d['pelanggan_nama'];?></td>
-                        <td><?php echo $d['transaksi_berat'];?></td>
-                        <td><?php echo $d['transaksi_tgl_selesai'];?></td>
-                        <td><?php echo "Rp. ".number_format($d['transaksi_harga'])." ,-";?></td>
-                        
-                        <td><?php
-                        if($d['transaksi_status'] == "0"){
-                            echo "<div class='label label-warning'>PROSES</div>";
-                        }else if($d['transaksi_status'] == "1"){
-                            echo "<div class='label label-info'>DICUCI</div>";
-                        }else if($d['transaksi_status'] == "2"){
-                            echo "<div class='label label-success'>SELESAI</div>";
-                        }
-                        ?>
-                        </td>
-
-                        <td>
-                        <a href="transaksi_invoice.php?id=<?php echo $d['transaksi_id'];?>" 
-                        target="_blank" class="btn btn-sm btn-warning" title="INVOICE">
-                        <i class="fa fa-file-invoice-dollar"></i></a>
-
-                        <a href="transaksi_edit.php?id=<?php echo $d['transaksi_id'];?>"
-                        class="btn btn-sm btn-info" title="EDIT"><i class="fa fa-edit"></i></a>
-
-                        <a href="transaksi_hapus.php?id=<?php echo $d['transaksi_id'];?>" 
-                        class="btn btn-sm btn-danger" title="BATALKAN"><i class="fa fa-ban"></i></a>
-                        </td>
-                        
+                        <th class="px-4 py-2 text-left font-semibold">No</th>
+                        <th class="px-4 py-2 text-left font-semibold">Invoice</th>
+                        <th class="px-4 py-2 text-left font-semibold">Tanggal</th>
+                        <th class="px-4 py-2 text-left font-semibold">Pelanggan</th>
+                        <th class="px-4 py-2 text-left font-semibold">Berat (Kg)</th>
+                        <th class="px-4 py-2 text-left font-semibold">Tgl. Selesai</th>
+                        <th class="px-4 py-2 text-left font-semibold">Harga</th>
+                        <th class="px-4 py-2 text-left font-semibold">Status</th>
+                        <th class="px-4 py-2 text-center font-semibold">Opsi</th>
                     </tr>
-                <?php }?>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    <?php
+                    include '../koneksi.php';
+                    $data = mysqli_query($koneksi, "SELECT * FROM pelanggan, transaksi WHERE transaksi_pelanggan = pelanggan_id ORDER BY transaksi_id DESC");
+                    $no = 1;
+                    while($d = mysqli_fetch_array($data)){
+                    ?>
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-4 py-2"><?php echo $no++; ?></td>
+                        <td class="px-4 py-2 font-mono">INVOICE-<?php echo $d['transaksi_id']; ?></td>
+                        <td class="px-4 py-2"><?php echo $d['transaksi_tgl']; ?></td>
+                        <td class="px-4 py-2"><?php echo $d['pelanggan_nama']; ?></td>
+                        <td class="px-4 py-2"><?php echo $d['transaksi_berat']; ?></td>
+                        <td class="px-4 py-2"><?php echo $d['transaksi_tgl_selesai']; ?></td>
+                        <td class="px-4 py-2"><?php echo "Rp. ".number_format($d['transaksi_harga'])." ,-"; ?></td>
+                        <td class="px-4 py-2">
+                            <?php
+                            if($d['transaksi_status'] == "0"){
+                                echo "<span class='px-2 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-1.5 rounded-full text-xs md:text-sm transition'>PROSES</span>";
+                            } else if($d['transaksi_status'] == "1"){
+                                echo "<span class='px-2 py-2 bg-blue-600 hover:bg-yellow-700 text-white font-semibold px-4 py-1.5 rounded-full text-xs md:text-sm transition'>DICUCI</span>";
+                            } else if($d['transaksi_status'] == "2"){
+                                echo "<span class='px-2 py-2 bg-blue-600 hover:bg-green-700 text-white font-semibold px-4 py-1.5 rounded-full text-xs md:text-sm transition'>SELESAI</span>";
+                            }
+                            ?>
+                        </td>
+                        <td class="px-4 py-2 text-center">
+    <div class="flex flex-col md:flex-row justify-center items-center gap-2">
+        <a href="transaksi_invoice.php?id=<?php echo $d['transaksi_id']; ?>" target="_blank"
+           class="inline-block bg-yellow-400 hover:bg-yellow-500 text-white font-semibold px-4 py-1.5 rounded-full text-xs md:text-sm transition">
+            🧾 Invoice
+        </a>
+        <a href="transaksi_edit.php?id=<?php echo $d['transaksi_id']; ?>"
+           class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-1.5 rounded-full text-xs md:text-sm transition">
+            ✏️ Edit
+        </a>
+        <a href="transaksi_hapus.php?id=<?php echo $d['transaksi_id']; ?>"
+           onclick="return confirm('Yakin ingin membatalkan transaksi ini?')"
+           class="inline-block bg-red-600 hover:bg-red-700 text-white font-semibold px-4 py-1.5 rounded-full text-xs md:text-sm transition">
+            ❌ Batalkan
+        </a>
+    </div>
+</td>
+
+        </a>
+    </div>
+</td>
+
+                            </a>
+                        </td>
+                    </tr>
+                    <?php } ?>
+                </tbody>
             </table>
         </div>
     </div>
 </div>
-<?php include 'footer.php';?>
+
+<?php include 'footer.php'; ?>
