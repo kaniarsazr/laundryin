@@ -1,77 +1,34 @@
 <?php include 'header.php'; ?>
 
-<style>
-    .custom-card {
-        background: #ffffff;
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        padding: 30px;
-        margin-top: 60px;
-    }
+<div class="min-h-screen bg-gray-100 py-10 px-4">
+  <div class="max-w-xl mx-auto bg-white p-8 rounded-2xl shadow-lg">
+    <h2 class="text-2xl font-bold text-gray-800 mb-6">🧾 Tambah Pelanggan Baru</h2>
 
-    .custom-card .card-title {
-        font-weight: 600;
-        font-size: 20px;
-        color: #0275d8;
-        border-bottom: 2px solid #f0f0f0;
-        padding-bottom: 10px;
-        margin-bottom: 25px;
-    }
+    <form method="post" action="pelanggan_aksi.php" class="space-y-5">
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Nama</label>
+        <input type="text" name="nama" placeholder="Masukkan Nama..."
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+      </div>
 
-    .form-control {
-        border-radius: 8px;
-        border: 1px solid #ddd;
-        transition: 0.3s ease;
-    }
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">HP</label>
+        <input type="text" name="hp" placeholder="Masukkan No. HP..."
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+      </div>
 
-    .form-control:focus {
-        border-color: #5bc0de;
-        box-shadow: 0 0 0 2px rgba(91,192,222,0.2);
-    }
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Alamat</label>
+        <input type="text" name="alamat" placeholder="Masukkan Alamat..."
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+      </div>
 
-    .btn-primary {
-        background: linear-gradient(to right, #0275d8, #1891f5, #5bc0de);
-        border: none;
-        border-radius: 8px;
-        font-weight: 600;
-        padding: 10px 25px;
-        transition: 0.3s ease;
-    }
-
-    .btn-primary:hover {
-        background: linear-gradient(to right, #1891f5, #0275d8);
-    }
-</style>
-
-<div class="container">
-    <div class="col-md-6 col-md-offset-3">
-        <div class="custom-card">
-            <div class="card-title">
-                <i class="fa fa-user-plus"></i> Tambah Pelanggan Baru
-            </div>
-
-            <form method="post" action="pelanggan_aksi.php">
-                <div class="form-group">
-                    <label>Nama</label>
-                    <input type="text" class="form-control" name="nama" placeholder="Masukkan Nama .." required>
-                </div>
-
-                <div class="form-group">
-                    <label>HP</label>
-                    <input type="text" class="form-control" name="hp" placeholder="Masukkan No. HP .." required>
-                </div>
-
-                <div class="form-group">
-                    <label>Alamat</label>
-                    <input type="text" class="form-control" name="alamat" placeholder="Masukkan Alamat .." required>
-                </div>
-
-                <div class="text-right">
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fa fa-save"></i> Simpan
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
+      <div class="pt-4">
+        <button type="submit"
+          class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition duration-200">
+          💾 Simpan Data
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
