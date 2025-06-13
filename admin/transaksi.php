@@ -1,77 +1,159 @@
 <?php include 'header.php'; ?>
 
-<div class="px-6 py-10">
-    <div class="bg-white shadow-md rounded-lg p-6">
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-semibold text-gray-800">Data Transaksi Laundry</h2>
-            <a href="transaksi_tambah.php" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm">
-                <i class="fas fa-plus mr-1"></i> Transaksi Baru
-            </a>
+<style>
+    body {
+        background-color: #f4f6f9;
+    }
+
+    .panel {
+        background: linear-gradient(to bottom right, #ffffff, #f8faff);
+        border: none;
+        border-radius: 10px;
+        padding: 25px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .panel-heading {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .panel-heading h4 {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+        font-size: 26px;
+        color: #333;
+        margin: 0;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+
+    .btn {
+        border-radius: 4px;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .btn-sm {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+
+    .btn-info {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: white;
+        box-shadow: 0 2px 4px rgba(0,123,255,0.4);
+    }
+
+    .btn-warning {
+        background-color: #ffc107;
+        border-color: #ffc107;
+        color: #212529;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        border-color: #dc3545;
+        color: white;
+    }
+
+    .table {
+        font-family: 'Poppins', sans-serif;
+        font-size: 14px;
+        background-color: #ffffff;
+    }
+
+    .table > thead > tr {
+        background-color: #e8f0fe;
+        color: #333;
+    }
+
+    .table > tbody > tr:hover {
+        background-color: #f1f7ff;
+    }
+
+    .badge {
+        padding: 5px 10px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .badge.proses { background-color: #ffc107; color: #000; }
+    .badge.dicuci { background-color: #17a2b8; color: #fff; }
+    .badge.selesai { background-color: #28a745; color: #fff; }
+
+    .top-btn-container {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 15px;
+    }
+</style>
+
+<div class="container">
+    <div class="panel">
+        <div class="panel-heading">
+            <h4>Data Transaksi Laundry</h4>
         </div>
 
-        <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200 text-sm">
-                <thead class="bg-blue-600 text-white">
-                    <tr>
-                        <th class="px-4 py-2 text-left font-semibold">No</th>
-                        <th class="px-4 py-2 text-left font-semibold">Invoice</th>
-                        <th class="px-4 py-2 text-left font-semibold">Tanggal</th>
-                        <th class="px-4 py-2 text-left font-semibold">Pelanggan</th>
-                        <th class="px-4 py-2 text-left font-semibold">Berat (Kg)</th>
-                        <th class="px-4 py-2 text-left font-semibold">Tgl. Selesai</th>
-                        <th class="px-4 py-2 text-left font-semibold">Harga</th>
-                        <th class="px-4 py-2 text-left font-semibold">Status</th>
-                        <th class="px-4 py-2 text-center font-semibold">Opsi</th>
+        <div class="panel-body">
+            <div class="top-btn-container">
+                <a href="transaksi_tambah.php" class="btn btn-info btn-sm" style="font-size: 14px; padding: 10px 20px;">
+                    <i class="fa fa-plus"></i> Transaksi Baru
+                </a>
+            </div>
+
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr class="text-center">
+                        <th width="1%">No</th>
+                        <th>Invoice</th>
+                        <th>Tanggal</th>
+                        <th>Pelanggan</th>
+                        <th>Berat (Kg)</th>
+                        <th>Tgl. Selesai</th>
+                        <th>Harga</th>
+                        <th>Status</th>
+                        <th width="22%">OPSI</th>
                     </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
+                <tbody>
                     <?php
                     include '../koneksi.php';
-                    $data = mysqli_query($koneksi, "SELECT * FROM pelanggan, transaksi WHERE transaksi_pelanggan = pelanggan_id ORDER BY transaksi_id DESC");
+                    $data = mysqli_query($koneksi, "SELECT * FROM pelanggan,transaksi WHERE transaksi_pelanggan=pelanggan_id ORDER BY transaksi_id DESC");
                     $no = 1;
                     while($d = mysqli_fetch_array($data)){
+                        $statusBadge = "";
+                        if($d['transaksi_status'] == "0"){
+                            $statusBadge = "<span class='badge proses'>PROSES</span>";
+                        } else if($d['transaksi_status'] == "1"){
+                            $statusBadge = "<span class='badge dicuci'>DICUCI</span>";
+                        } else if($d['transaksi_status'] == "2"){
+                            $statusBadge = "<span class='badge selesai'>SELESAI</span>";
+                        }
                     ?>
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-4 py-2"><?php echo $no++; ?></td>
-                        <td class="px-4 py-2 font-mono">INVOICE-<?php echo $d['transaksi_id']; ?></td>
-                        <td class="px-4 py-2"><?php echo $d['transaksi_tgl']; ?></td>
-                        <td class="px-4 py-2"><?php echo $d['pelanggan_nama']; ?></td>
-                        <td class="px-4 py-2"><?php echo $d['transaksi_berat']; ?></td>
-                        <td class="px-4 py-2"><?php echo $d['transaksi_tgl_selesai']; ?></td>
-                        <td class="px-4 py-2"><?php echo "Rp. ".number_format($d['transaksi_harga'])." ,-"; ?></td>
-                        <td class="px-4 py-2">
-                            <?php
-                            if($d['transaksi_status'] == "0"){
-                                echo "<span class='px-2 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-1.5 rounded-full text-xs md:text-sm transition'>PROSES</span>";
-                            } else if($d['transaksi_status'] == "1"){
-                                echo "<span class='px-2 py-2 bg-blue-600 hover:bg-yellow-700 text-white font-semibold px-4 py-1.5 rounded-full text-xs md:text-sm transition'>DICUCI</span>";
-                            } else if($d['transaksi_status'] == "2"){
-                                echo "<span class='px-2 py-2 bg-blue-600 hover:bg-green-700 text-white font-semibold px-4 py-1.5 rounded-full text-xs md:text-sm transition'>SELESAI</span>";
-                            }
-                            ?>
-                        </td>
-                        <td class="px-4 py-2 text-center">
-    <div class="flex flex-col md:flex-row justify-center items-center gap-2">
-        <a href="transaksi_invoice.php?id=<?php echo $d['transaksi_id']; ?>" target="_blank"
-           class="inline-block bg-yellow-400 hover:bg-yellow-500 text-white font-semibold px-4 py-1.5 rounded-full text-xs md:text-sm transition">
-            🧾 Invoice
-        </a>
-        <a href="transaksi_edit.php?id=<?php echo $d['transaksi_id']; ?>"
-           class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-1.5 rounded-full text-xs md:text-sm transition">
-            ✏️ Edit
-        </a>
-        <a href="transaksi_hapus.php?id=<?php echo $d['transaksi_id']; ?>"
-           onclick="return confirm('Yakin ingin membatalkan transaksi ini?')"
-           class="inline-block bg-red-600 hover:bg-red-700 text-white font-semibold px-4 py-1.5 rounded-full text-xs md:text-sm transition">
-            ❌ Batalkan
-        </a>
-    </div>
-</td>
-
-        </a>
-    </div>
-</td>
-
+                    <tr>
+                        <td><?php echo $no++; ?></td>
+                        <td>INVOICE-<?php echo $d['transaksi_id']; ?></td>
+                        <td><?php echo $d['transaksi_tgl']; ?></td>
+                        <td><?php echo $d['pelanggan_nama']; ?></td>
+                        <td class="text-center"><?php echo $d['transaksi_berat']; ?></td>
+                        <td><?php echo $d['transaksi_tgl_selesai']; ?></td>
+                        <td><?php echo "Rp. ".number_format($d['transaksi_harga'])." ,-"; ?></td>
+                        <td class="text-center"><?php echo $statusBadge; ?></td>
+                        <td>
+                            <a href="transaksi_invoice.php?id=<?php echo $d['transaksi_id']; ?>" target="_blank"
+                               class="btn btn-warning btn-sm mb-1" title="Lihat Invoice">
+                                <i class="fa fa-file-invoice-dollar"></i> Invoice
+                            </a>
+                            <a href="transaksi_edit.php?id=<?php echo $d['transaksi_id']; ?>"
+                               class="btn btn-info btn-sm mb-1" title="Edit Transaksi">
+                                <i class="fa fa-edit"></i> Edit
+                            </a>
+                            <a href="transaksi_hapus.php?id=<?php echo $d['transaksi_id']; ?>"
+                               class="btn btn-danger btn-sm mb-1"
+                               onclick="return confirm('Yakin ingin membatalkan transaksi ini?')"
+                               title="Batalkan Transaksi">
+                                <i class="fa fa-ban"></i> Batal
                             </a>
                         </td>
                     </tr>
