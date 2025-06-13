@@ -1,0 +1,3 @@
+import this database into your mysql (PhpMyAdmin). 
+
+ahmad_irfanda_
