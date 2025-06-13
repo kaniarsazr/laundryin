@@ -8,7 +8,7 @@
         body {
             margin: 0;
             padding: 0;
-            background: linear-gradient(to right, #0275d8, #1891f5,#5bc0de);
+            background: linear-gradient(to right, #2193b0, #6dd5ed);
             font-family: 'Segoe UI', sans-serif;
             height: 100vh;
             display: flex;
