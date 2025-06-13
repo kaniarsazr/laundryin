@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 12, 2025 at 07:48 PM
--- Server version: 10.4.32-MariaDB-log
--- PHP Version: 8.2.12
+-- Host: localhost:3306
+-- Generation Time: Jun 13, 2025 at 12:19 PM
+-- Server version: 8.0.30
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -53,7 +53,7 @@ END$$
 --
 -- Functions
 --
-CREATE DEFINER=`root`@`localhost` FUNCTION `hitung_total` (`berat` DECIMAL(10,2), `harga_per_kilo` INT) RETURNS INT(11) DETERMINISTIC BEGIN
+CREATE DEFINER=`root`@`localhost` FUNCTION `hitung_total` (`berat` DECIMAL(10,2), `harga_per_kilo` INT) RETURNS INT DETERMINISTIC BEGIN
     RETURN berat * harga_per_kilo;
 END$$
 
@@ -66,9 +66,9 @@ DELIMITER ;
 --
 
 CREATE TABLE `admin` (
-  `id` int(11) NOT NULL,
-  `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `id` int NOT NULL,
+  `username` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -77,7 +77,8 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`id`, `username`, `password`) VALUES
 (0, 'admin', 'admin123'),
-(1, 'kania', 'kania123');
+(1, 'kania', 'kania123'),
+(2, 'della', 'della123');
 
 -- --------------------------------------------------------
 
@@ -86,7 +87,7 @@ INSERT INTO `admin` (`id`, `username`, `password`) VALUES
 --
 
 CREATE TABLE `harga` (
-  `harga_per_kilo` int(11) NOT NULL
+  `harga_per_kilo` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -103,9 +104,9 @@ INSERT INTO `harga` (`harga_per_kilo`) VALUES
 --
 
 CREATE TABLE `log_transaksi` (
-  `log_id` int(11) NOT NULL,
-  `log_pelanggan_id` int(11) DEFAULT NULL,
-  `log_transaksi_id` int(11) DEFAULT NULL,
+  `log_id` int NOT NULL,
+  `log_pelanggan_id` int DEFAULT NULL,
+  `log_transaksi_id` int DEFAULT NULL,
   `log_tanggal` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -115,10 +116,10 @@ CREATE TABLE `log_transaksi` (
 
 INSERT INTO `log_transaksi` (`log_id`, `log_pelanggan_id`, `log_transaksi_id`, `log_tanggal`) VALUES
 (1, 9, 5, '2025-06-12 23:45:01'),
-(3, 7, 7, '2025-06-12 23:52:57'),
 (5, 8, 9, '2025-06-12 23:56:01'),
 (7, 9, 11, '2025-06-13 00:37:54'),
-(9, 11, 13, '2025-06-13 00:43:23');
+(11, 13, 15, '2025-06-13 18:37:06'),
+(12, 11, 16, '2025-06-13 18:37:56');
 
 -- --------------------------------------------------------
 
@@ -127,10 +128,10 @@ INSERT INTO `log_transaksi` (`log_id`, `log_pelanggan_id`, `log_transaksi_id`, `
 --
 
 CREATE TABLE `pakaian` (
-  `pakaian_id` int(11) NOT NULL,
-  `pakaian_transaksi` int(11) NOT NULL,
-  `pakaian_jenis` varchar(255) NOT NULL,
-  `pakaian_jumlah` int(11) NOT NULL
+  `pakaian_id` int NOT NULL,
+  `pakaian_transaksi` int NOT NULL,
+  `pakaian_jenis` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `pakaian_jumlah` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -142,8 +143,6 @@ INSERT INTO `pakaian` (`pakaian_id`, `pakaian_transaksi`, `pakaian_jenis`, `paka
 (7, 3, 'Celana Levis', 1),
 (8, 3, 'Baju Kemeja', 1),
 (9, 3, 'Kain Sarung', 1),
-(13, 4, 'Jaket', 1),
-(14, 4, 'Celana Pendek', 2),
 (18, 1, 'Baju Kaos', 5),
 (19, 1, 'Celana Pendek', 2),
 (20, 1, 'Baju Batik', 2),
@@ -157,7 +156,8 @@ INSERT INTO `pakaian` (`pakaian_id`, `pakaian_transaksi`, `pakaian_jenis`, `paka
 (33, 9, 'Kemeja', 6),
 (39, 5, 'Selimut', 1),
 (43, 11, 'Celana Dalam', 5),
-(45, 13, 'Baju Kaos', 3);
+(49, 1, 'celana', 3),
+(51, 123, 'celana', 2);
 
 -- --------------------------------------------------------
 
@@ -166,11 +166,11 @@ INSERT INTO `pakaian` (`pakaian_id`, `pakaian_transaksi`, `pakaian_jenis`, `paka
 --
 
 CREATE TABLE `pelanggan` (
-  `pelanggan_id` int(11) NOT NULL,
-  `pelanggan_nama` varchar(255) NOT NULL,
-  `pelanggan_hp` varchar(20) NOT NULL,
-  `pelanggan_alamat` text NOT NULL,
-  `pelanggan_status` varchar(20) DEFAULT 'Tidak Aktif'
+  `pelanggan_id` int NOT NULL,
+  `pelanggan_nama` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `pelanggan_hp` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `pelanggan_alamat` text COLLATE utf8mb4_general_ci NOT NULL,
+  `pelanggan_status` varchar(20) COLLATE utf8mb4_general_ci DEFAULT 'Tidak Aktif'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -178,10 +178,10 @@ CREATE TABLE `pelanggan` (
 --
 
 INSERT INTO `pelanggan` (`pelanggan_id`, `pelanggan_nama`, `pelanggan_hp`, `pelanggan_alamat`, `pelanggan_status`) VALUES
-(7, 'Rival', '0873222022', 'New York', 'Aktif'),
-(8, 'Mayar', '089934531343', 'Jl. Cendrawasih', 'Aktif'),
-(9, 'Kania', '08123', 'Hatimu', 'Nonaktif'),
-(11, 'Indah', '081234567890', 'Pokoknya', 'Aktif');
+(8, 'RANIA', '089934531343', 'Jl. Cendrawasih', 'Aktif'),
+(9, 'Kania', '08123', 'Hatimu', 'Aktif'),
+(11, 'Indah', '081234567890', 'Pokoknya', 'Nonaktif'),
+(13, 'Indah Febriana Della', '089670976543', 'Tanggamus', 'Aktif');
 
 -- --------------------------------------------------------
 
@@ -190,13 +190,13 @@ INSERT INTO `pelanggan` (`pelanggan_id`, `pelanggan_nama`, `pelanggan_hp`, `pela
 --
 
 CREATE TABLE `transaksi` (
-  `transaksi_id` int(11) NOT NULL,
+  `transaksi_id` int NOT NULL,
   `transaksi_tgl` date NOT NULL,
-  `transaksi_pelanggan` int(11) NOT NULL,
-  `transaksi_harga` int(11) NOT NULL,
-  `transaksi_berat` int(11) NOT NULL,
+  `transaksi_pelanggan` int NOT NULL,
+  `transaksi_harga` int NOT NULL,
+  `transaksi_berat` int NOT NULL,
   `transaksi_tgl_selesai` date NOT NULL,
-  `transaksi_status` int(11) NOT NULL
+  `transaksi_status` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -207,12 +207,13 @@ INSERT INTO `transaksi` (`transaksi_id`, `transaksi_tgl`, `transaksi_pelanggan`,
 (1, '2020-01-14', 5, 24000, 3, '2020-01-15', 2),
 (2, '2020-01-14', 6, 16000, 2, '2020-01-18', 1),
 (3, '2020-01-14', 7, 8000, 1, '2020-01-19', 0),
-(4, '2020-01-14', 8, 8000, 1, '2020-01-19', 0),
+(4, '2020-01-14', 8, 8000, 1, '2020-01-19', 1),
 (5, '2025-06-12', 9, 24000, 3, '2025-06-12', 2),
 (7, '2025-06-12', 7, 40000, 5, '2025-06-12', 0),
 (9, '2025-06-12', 8, 16000, 2, '2025-06-12', 0),
 (11, '2025-06-12', 9, 8000, 1, '2025-06-13', 2),
-(13, '2025-06-12', 11, 8000, 1, '2025-06-13', 0);
+(15, '2025-06-13', 13, 32000, 4, '2025-06-14', 1),
+(16, '2025-06-13', 11, 56000, 7, '2025-06-15', 0);
 
 --
 -- Triggers `transaksi`
@@ -299,25 +300,25 @@ ALTER TABLE `transaksi`
 -- AUTO_INCREMENT for table `log_transaksi`
 --
 ALTER TABLE `log_transaksi`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `log_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `pakaian`
 --
 ALTER TABLE `pakaian`
-  MODIFY `pakaian_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `pakaian_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `pelanggan`
 --
 ALTER TABLE `pelanggan`
-  MODIFY `pelanggan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `pelanggan_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `transaksi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `transaksi_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Constraints for dumped tables
@@ -327,7 +328,7 @@ ALTER TABLE `transaksi`
 -- Constraints for table `log_transaksi`
 --
 ALTER TABLE `log_transaksi`
-  ADD CONSTRAINT `log_transaksi_ibfk_1` FOREIGN KEY (`log_pelanggan_id`) REFERENCES `pelanggan` (`pelanggan_id`),
+  ADD CONSTRAINT `log_transaksi_ibfk_1` FOREIGN KEY (`log_pelanggan_id`) REFERENCES `pelanggan` (`pelanggan_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `log_transaksi_ibfk_2` FOREIGN KEY (`log_transaksi_id`) REFERENCES `transaksi` (`transaksi_id`);
 COMMIT;
 
