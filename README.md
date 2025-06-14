@@ -4,8 +4,7 @@ LaundryIn merupakan sistem informasi laundry sederhana yang dibangun menggunakan
 
 ![image](https://github.com/user-attachments/assets/d3c25da4-612d-4712-8838-b16c9f863e97)
 
-![image](https://github.com/user-attachments/assets/10048996-4926-4a09-a280-dec89e46f972)
-
+![image](https://github.com/user-attachments/assets/e43e0a84-2538-44f1-9f2e-be40f13b7618)
 
 ## 📌 Detail Konsep
 
