@@ -76,7 +76,7 @@ try {
 
 Dengan mekanisme ini, sistem mencegah penyimpanan setengah jadi yang dapat menyebabkan inkonsistensi data di tabel `transaksi` dan `pakaian`.
 
-### 🔄 Stored Function
+### 📺 Stored Function
 
 Stored function digunakan untuk menghitung total harga secara otomatis berdasarkan berat pakaian dan harga per kilo. Dengan menyimpan fungsi ini di dalam database, perhitungan menjadi lebih konsisten dan tidak perlu dikodekan ulang di banyak tempat.
 
@@ -97,7 +97,7 @@ END;
 
 Function ini dipanggil dari dalam `tambah_transaksi`, sehingga perhitungan total dilakukan otomatis dan aman dari manipulasi sisi client.
 
-### 🔄 Trigger
+### 🚨 Trigger
 
 Trigger di LaundryIn digunakan untuk menjaga otomatisasi status pelanggan dan pencatatan log ketika terjadi perubahan data di tabel `transaksi`. Dua trigger utama digunakan untuk mengelola status pelanggan berdasarkan aktivitas transaksi:
 
