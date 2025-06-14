@@ -2,6 +2,9 @@
 
 LaundryIn merupakan sistem informasi laundry sederhana yang dibangun menggunakan PHP dan MySQL. Tujuannya adalah untuk mengelola transaksi layanan laundry secara aman dan konsisten, dengan memanfaatkan **stored procedure**, **transaction**, **stored function**, dan **trigger**. Sistem ini memastikan bahwa seluruh data transaksi dan pakaian yang berkaitan disimpan secara utuh atau tidak sama sekali jika terjadi kesalahan. Seluruh logika utama ditempatkan di level database agar aplikasi tetap menjaga integritas data meskipun dijalankan secara multi-user.
 
+![image](https://github.com/user-attachments/assets/d3c25da4-612d-4712-8838-b16c9f863e97)
+
+![image](https://github.com/user-attachments/assets/10048996-4926-4a09-a280-dec89e46f972)
 
 
 ## 📌 Detail Konsep
