@@ -154,6 +154,20 @@ END;
 
 Dengan dua trigger ini, sistem LaundryIn secara otomatis memastikan bahwa status pelanggan selalu merepresentasikan kondisi terkini transaksi mereka.
 
+### 🔄 Backup Otomatis
+Untuk menjaga ketersediaan dan keamanan data, sistem dilengkapi fitur backup otomatis menggunakan `mysqldump`dan task scheduler. Backup dilakukan secara berkala dan disimpan dengan nama file yang mencakup timestamp, sehingga mudah ditelusuri. Semua file disimpan di direktori `storage/backups`.
+
+`backup.php`
+```php
+<?php
+require_once __DIR__ . '/init.php';
+
+$date = date('Y-m-d_H-i-s');
+$backupFile = __DIR__ . "/storage/backups/laundryin_$date.sql";
+$command = "\"C:\\xampp\\mysql\\bin\\mysqldump.exe\" -u " . DB_USER . " " . DB_NAME . " > \"$backupFile\"";
+exec($command);
+```
+
 ---
 
 ## 🛠️ Integrasi dengan Sistem
